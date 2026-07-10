@@ -59,39 +59,31 @@
   </head>
   <body style="background-image: url('../img/1913324.jpg'); background-size: cover">
 
-    <div style="display: flex; justify-content: space-between; align-items: flex-start; border: 5px solid; border-radius: 35px; padding: 20px; color: black;
-    background-color: rgba(242, 255, 154, 0.25); font-family: Luxurious Roman; ">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; border: 0cap; border-radius: 35px; padding: 10px; color: black;
+    background-color: rgba(242, 255, 154, 0.5); font-family: Luxurious Roman; ">
 
-  <p style="border: solid; border-radius: 50px; background-color: rgba(122, 116, 0, 0.25);">
+  <p style="border: 0cap; border-radius: 50px; background-color: rgba(122, 116, 0, 0.25); padding: 5px; ">
     AngelOS
   </p>
-  <p style="font-family: Changa One; ">
+  <p style="font-family: Changa One; border: 0cap; border-radius: 50px; background-color: rgba(122, 116, 0, 0.25); padding: 5px; ">
     Seré quién todo lo dio por triunfar...
   </p>
-  <p id="Reloj">
+  <p id="Reloj" style="border: 0cap; border-radius: 50px; background-color: rgba(122, 116, 0, 0.25); padding: 5px;">
     Time
 
   </p>
     </div>
 <!--Aqui quiero centrar el elemento -->
-<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50px; padding: 20px;
- color: antiquewhite; background-color: antiquewhite; width: fit-content">
+<div id="pBienvenida" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50px; padding: 20px;
+ color: antiquewhite; background-color: antiquewhite; width: fit-content; height: 250px; width: 400px;">
+ <p id="header" style="border: 10px; background-color: chocolate;">
+
+ </p>
  <h2 style="font-family: 'Changa One'; font-weight: 100; color: black;">Intro: This would be a repo(not github nerdy people) of all challenges un my life, my awards a prizes</h2>
   <a href="https://www.youtube.com/watch?v=Jv2gPmK-rg4&list=RDJv2gPmK-rg4&start_radio=1" style="font-family: Changa One; font-weight: 100;">Favourite Music!</a>
   <h2 style="font-family: 'Changa One'; font-weight: 100; color: black;">I hope you listen to that :D</h2>
 </div>
-<script>
-  function actualizarTiempo(){
-    var currentTime = new Date().toLocaleString();
-    var textoTiempo = document.querySelector("#Reloj");
-    if (textoTiempo) {
-      textoTiempo.textContent = currentTime;
-    }
-  }
-
-  actualizarTiempo();
-  setInterval(actualizarTiempo, 1000);
-</script>
+<script src="script.js"></script>
 
 
    
