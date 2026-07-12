@@ -64,4 +64,22 @@ function dragElement(element) {
   }
 }
 
-// var Bienvenida = document.querySelector(#pBienvenida);
+var Bienvenida = document.querySelector("#pBienvenida")
+function cerrarVentana(element) {
+  element.style.display = "none"
+}
+function abrirVentana(element){
+  element.style.display = "flex"
+}
+
+var cerrarBienvenida = document.querySelector("#cerrarVentana")
+var abrirBienvenida = document.querySelector("#abrirVentana")
+
+cerrarBienvenida.addEventListener("click", function() {
+  cerrarVentana(Bienvenida);
+});
+
+abrirBienvenida.addEventListener("click", function() {
+  abrirVentana(Bienvenida);
+});
+
