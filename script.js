@@ -83,3 +83,24 @@ abrirBienvenida.addEventListener("click", function() {
   abrirVentana(Bienvenida);
 });
 
+var selectedIcon = undefined;
+
+function selectIcon(element) {
+  element.classList.add("selected");
+  selectedIcon = element;
+}
+
+function deselectIcon(element) {
+  element.classList.remove("selected");
+  selectedIcon = undefined;
+}
+
+function handleIconClick(element) {
+  if (element.classList.contains("selected")) {
+    deselectIcon(element);
+    abrirVentana(Bienvenida);
+  }
+  else {
+    selectIcon(element);
+  }
+}
