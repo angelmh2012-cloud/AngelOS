@@ -2,118 +2,247 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Google Fonts</title>
+    <title>AngelOS</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Changa+One:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Changa+One:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Romanesco&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Luxurious+Roman&family=Montenegrin+Gothic+One&family=Uncial+Antiqua&display=swap" rel="stylesheet">
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background-image: url('../img/1913324.jpg');
+        background-size: cover;
+        font-family: "Changa One", sans-serif;
+      }
 
- <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Romanesco&display=swap" rel="stylesheet">
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        border: 0;
+        border-radius: 35px;
+        padding: 10px;
+        color: rgb(0, 0, 0);
+        background-color: rgba(242, 255, 154, 0.5);
+        font-family: "Black Ops One", serif;
+      }
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Luxurious+Roman&family=Montenegrin+Gothic+One&family=Uncial+Antiqua&display=swap" rel="stylesheet">
-  <style>
-    .changa-one-regular {
-  font-family: "Changa One", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
+      .topbar p {
+        border: 0;
+        border-radius: 50px;
+        background-color: rgba(122, 116, 0, 0.25);
+        padding: 5px;
+        margin: 0;
+      }
 
-.changa-one-regular-italic {
-  font-family: "Changa One", sans-serif;
-  font-weight: 400;
-  font-style: italic;
-}
+      .desktop {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+        padding: 20px;
+        width: fit-content;
+      }
 
-.romanesco-regular {
-  font-family: "Romanesco", cursive;
-  font-weight: 400;
-  font-style: normal;
-}
+      .desktop-icon {
+        width: 100px;
+        padding: 10px;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+        color: white;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.25);
+        transition: background 0.2s ease;
+        box-shadow: #2e2e2e 0px 0px 10px 2px;
+      }
 
-.luxurious-roman-regular {
-  font-family: "Luxurious Roman", serif;
-  font-weight: 400;
-  font-style: normal;
-}
-.montenegrin-gothic-one-regular {
-  font-family: "Montenegrin Gothic One", serif;
-  font-weight: 400;
-  font-style: normal;
-}
-.black-ops-one-regular {
-  font-family: "Black Ops One", system-ui;
-  font-weight: 400;
-  font-style: normal;
-}
-.uncial-antiqua-regular {
-  font-family: "Uncial Antiqua", system-ui;
-  font-weight: 400;
-  font-style: normal;
-}
-.selected {
-  background-color: rgba(0, 122, 43, 0.5);
-  color: white;
-  box-shadow: none;
+      .desktop-icon:hover {
+        background: rgba(0, 0, 0, 0.4);
+        box-shadow: #ffffff 0px 0px 0px 0px;
+      }
 
-}
-.window{
-  display: flex; 
-  flex-direction: column;
-  justify-content: center; 
-  align-items: center; text-align: center;
-  position: absolute; top: 50%; left: 50%; 
-  transform: translate(-50%, -50%); border-radius: 50px; 
-  padding: 20px;
-  color: antiquewhite;
-  background-color: antiquewhite;
-  width: 500px; height: 250px; 
-}
-  </style>
+      .icon-circle {
+        width: 72px;
+        height: 72px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.95);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2rem;
+        box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.6);
+      }
+
+      .desktop-icon p {
+        margin: 8px 0 0;
+        font-family: "Changa One", sans-serif;
+        font-weight: 100;
+        color: white;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+      }
+
+      .window {
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: min(560px, 90vw);
+        border-radius: 24px;
+        overflow: hidden;
+        background: rgba(255, 240, 223, 0.95);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+        color: #2e2e2e;
+        z-index: 10;
+        padding: 10px;
+      }
+
+      .window-titlebar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 14px;
+        background: rgba(241, 207, 139, 0.95);
+        border-radius: 20px;
+        color: white;
+        cursor: move;
+      }
+
+      .window-close {
+        border: none;
+        background: #ff6b6b;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+
+      .window-content {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        max-height: 60vh;
+        overflow: auto;
+      }
+
+      .window-content h2,
+      .window-content p,
+      .window-content a {
+        margin: 0;
+        font-family: "Changa One", sans-serif;
+        font-weight: 100;
+        color: black;
+      }
+
+      .window-content a {
+        color: #7a2d0d;
+        text-decoration: underline;
+      }
+    </style>
   </head>
-  <body style="background-image: url('../img/1913324.jpg'); background-size: cover">
-
-    <div style="display: flex; justify-content: space-between; align-items: flex-start; border: 0cap; border-radius: 35px; padding: 10px; color: black;
-    background-color: rgba(242, 255, 154, 0.5); font-family: Luxurious Roman; ">
-
-  <p style="border: 0cap; border-radius: 50px; background-color: rgba(122, 116, 0, 0.25); padding: 5px; ">
-    AngelOS
-  </p>
-  <p style="font-family: Changa One; border: 0cap; border-radius: 50px; background-color: rgba(122, 116, 0, 0.25); padding: 5px; ">
-    Seré quién todo lo dio por triunfar...
-  </p>
-  <p id="Reloj" style="border: 0cap; border-radius: 50px; background-color: rgba(122, 116, 0, 0.25); padding: 5px;">
-    Time
-  </p>   
-  <!-- Aca termina la top-->
- 
-</div>
- <div id="escritorioApps" style="top: 60px; left: 20px;"> 
-    <div style="top: 10px; left: 10px; box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5); height: 50px; border-radius: 50px;
-     background-color: rgba(89, 89, 89, 1); display: flex; justify-content: center; align-items: center; cursor: pointer; width:fit-content; padding: 10px;">
-     <img src="/home/munoz/Documentos/AngelOS/f90a886634682bdba7100aadbc0d13c7.jpg" alt="Icono" style="width: 70px; height: 70px; border-radius: 50px;">
-      <p style="margin: 0px; font-family: Changa One; color: black; top: 10px; left: 10px;">
-        Bienvenida
-      </p>
-
+  <body>
+    <div class="topbar">
+      <p>AngelOS</p>
+      <p>Seré quién todo lo dio por triunfar...</p>
+      <p id="Reloj">Time</p>
     </div>
-  
-<!--Aqui quiero centrar el elemento -->
-<div id="pBienvenida" class="window" style="display: none; background-color: rgba(255, 255, 255, 0.5);
-  justify-content: space-between; align-items: center; width: 400px; height: 100px; padding: 0cap; border-radius: 50px;">
-  <div style="cursor: pointer; border-radius: 25px; border: solid 8px rgba(255, 0, 0, 0.5); margin-left: 6px; width: 25px; height: 25px;"  id="cerrarVentana";></div>
-  <div style="cursor: pointer; border-radius: 25px; border: solid 8px rgba(4, 255, 0, 0.5); margin-right: 6px; width: 25px; height: 25px; " id="abrirVentana";></div>
-</div>
 
- <h2 style="font-family: 'Changa One'; font-weight: 100; color: black;">Intro: This would be a repo(not github nerdy people) of all challenges un my life, my awards a prizes</h2>
-  <a href="https://www.youtube.com/watch?v=Jv2gPmK-rg4&list=RDJv2gPmK-rg4&start_radio=1" style="font-family: Changa One; font-weight: 100;">Favourite Music!</a>
-  <h2 style="font-family: 'Changa One'; font-weight: 100; color: black;">I hope you listen to that :D</h2>
-</div>
-<script src="script.js"></script>
+    <div id="escritorioApps" class="desktop">
+      <div class="desktop-icon" data-window="bienvenida">
+        <div class="icon-circle">
+          <img src="/home/munoz/Documentos/AngelOS/f90a886634682bdba7100aadbc0d13c7.jpg" alt="Bienvenida" style="width: 100%; height: 100%; border-radius: 20px;">
+        </div>
+        <p>Bienvenida</p>
+      </div>
 
+      <div class="desktop-icon" data-window="proyectos">
+        <div class="icon-circle">💼</div>
+        <p>Proyectos</p>
+      </div>
 
-   
+      <div class="desktop-icon" data-window="sobre-mi">
+        <div class="icon-circle">🧠</div>
+        <p>Sobre mí</p>
+      </div>
+
+      <div class="desktop-icon" data-window="musica">
+        <div class="icon-circle">🎵</div>
+        <p>Música</p>
+      </div>
+
+      <div class="desktop-icon" data-window="contacto">
+        <div class="icon-circle">✉️</div>
+        <p>Contacto</p>
+      </div>
+    </div>
+
+    <div id="window-bienvenida" class="window">
+      <div class="window-titlebar">
+        <span>Bienvenida</span>
+        <button class="window-close" data-window="bienvenida" aria-label="Cerrar ventana">×</button>
+      </div>
+      <div class="window-content">
+        <h2>Intro: This would be a repo (not github nerdy people) of all challenges in my life, my awards and prizes.</h2>
+        <a href="https://www.youtube.com/watch?v=Jv2gPmK-rg4&list=RDJv2gPmK-rg4&start_radio=1" target="_blank" rel="noopener">Favourite Music!</a>
+        <h2>I hope you listen to that :D</h2>
+      </div>
+    </div>
+
+    <div id="window-proyectos" class="window">
+      <div class="window-titlebar">
+        <span>Proyectos</span>
+        <button class="window-close" data-window="proyectos" aria-label="Cerrar ventana">×</button>
+      </div>
+      <div class="window-content">
+        <h2>Mis proyectos futuros</h2>
+        <p>Construiré una plataforma para compartir mis logros, retos y aprendizajes.</p>
+      </div>
+    </div>
+
+    <div id="window-sobre-mi" class="window">
+      <div class="window-titlebar">
+        <span>Sobre mí</span>
+        <button class="window-close" data-window="sobre-mi" aria-label="Cerrar ventana">×</button>
+      </div>
+      <div class="window-content">
+        <h2>Sobre mí</h2>
+        <p>Me gusta crecer, aprender y convertir cada desafío en una oportunidad.</p>
+      </div>
+    </div>
+
+    <div id="window-musica" class="window">
+      <div class="window-titlebar">
+        <span>Música</span>
+        <button class="window-close" data-window="musica" aria-label="Cerrar ventana">×</button>
+      </div>
+      <div class="window-content">
+        <h2>Mi playlist favorita</h2>
+        <p>Esta ventana guarda mi espacio musical personal y las canciones que me inspiran.</p>
+      </div>
+    </div>
+
+    <div id="window-contacto" class="window">
+      <div class="window-titlebar">
+        <span>Contacto</span>
+        <button class="window-close" data-window="contacto" aria-label="Cerrar ventana">×</button>
+      </div>
+      <div class="window-content">
+        <h2>Contacto</h2>
+        <p>Si quieres hablar, colaborar o compartir ideas, aquí estará mi canal de contacto.</p>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
   </body>
 </html>
