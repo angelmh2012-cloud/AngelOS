@@ -9,6 +9,42 @@ actualizarTiempo();
 setInterval(actualizarTiempo, 1000);
 
 let zIndex = 20;
+const dockList = document.getElementById("dockList");
+
+function createDockItem(appId) {
+  const desktopIcon = document.querySelector(`.desktop-icon[data-window="${appId}"]`);
+  if (!desktopIcon || !dockList) return null;
+
+  const item = document.createElement("li");
+  item.className = "dock-item is-visible";
+  item.dataset.window = appId;
+
+  const iconContent = desktopIcon.querySelector(".icon-circle")?.cloneNode(true);
+  const appLabel = desktopIcon.querySelector("p")?.textContent?.trim() || appId;
+
+  item.innerHTML = `
+    <button class="dock-button" data-window="${appId}" type="button">
+      <span class="dock-label">${appLabel}</span>
+      <span class="dock-icon"></span>
+    </button>
+  `;
+
+  item.querySelector(".dock-icon").appendChild(iconContent);
+  return item;
+}
+
+function ensureDockItem(appId) {
+  if (!dockList) return;
+
+  if (dockList.querySelector(`.dock-item[data-window="${appId}"]`)) {
+    return;
+  }
+
+  const dockItem = createDockItem(appId);
+  if (dockItem) {
+    dockList.appendChild(dockItem);
+  }
+}
 
 function openWindow(id) {
   const ventana = document.getElementById(`window-${id}`);
@@ -19,6 +55,8 @@ function openWindow(id) {
   ventana.style.top = "50%";
   ventana.style.transform = "translate(-50%, -50%)";
   ventana.style.zIndex = String(++zIndex);
+
+  ensureDockItem(id);
 }
 
 function closeWindow(id) {
@@ -79,4 +117,11 @@ document.querySelectorAll(".window").forEach((windowElement) => {
   if (titleBar) {
     makeDraggable(windowElement, titleBar);
   }
+});
+
+dockList?.addEventListener("click", (event) => {
+  const button = event.target.closest(".dock-button");
+  if (!button) return;
+
+  openWindow(button.dataset.window);
 });

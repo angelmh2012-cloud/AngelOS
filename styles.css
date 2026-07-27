@@ -1,0 +1,238 @@
+h1, p { text-align:center }
+p { margin-top:-18px }
+
+
+/* Dock */
+.dock {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  z-index: 30;
+  pointer-events: none;
+}
+
+.dock ul {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  list-style: none;
+  padding: 10px 12px;
+  margin: 0;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+}
+
+.dock li {
+  display: none;
+  pointer-events: auto;
+}
+
+.dock li.is-visible {
+  display: block;
+}
+
+.dock-button {
+  position: relative;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  color: white;
+}
+
+.dock-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dock-button:hover .dock-icon,
+.dock-button:focus-visible .dock-icon {
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.25);
+}
+
+.dock-label {
+  position: absolute;
+  top: -32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  opacity: 0;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.75);
+  color: white;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.dock-button:hover .dock-label,
+.dock-button:focus-visible .dock-label {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.dock-icon .icon-circle {
+  width: 100%;
+  height: 100%;
+  border-radius: 18px;
+  font-size: 1.45rem;
+  box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.12);
+}
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background-image: url('../img/1913324.jpg');
+        background-size: cover;
+        font-family: "Changa One", sans-serif;
+      }
+
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        border: 0;
+        border-radius: 35px;
+        padding: 10px;
+        color: rgb(0, 0, 0);
+        background-color: rgba(242, 255, 154, 0.5);
+        font-family: "Black Ops One", serif;
+      }
+
+      .topbar p {
+        border: 0;
+        border-radius: 50px;
+        background-color: rgba(122, 116, 0, 0.25);
+        padding: 5px;
+        margin: 0;
+      }
+
+      .desktop {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+        padding: 20px;
+        width: fit-content;
+      }
+
+      .desktop-icon {
+        width: 100px;
+        padding: 10px;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+        color: white;
+        text-align: center;
+/* From https://css.glass */
+        background: rgba(255, 211, 156, 0.43);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 211, 156, 0.47);
+      }
+
+      .desktop-icon:hover {
+        background: rgba(0, 0, 0, 0.4);
+        box-shadow: #ffffff 0px 0px 0px 0px;
+      }
+
+      .icon-circle {
+        width: 72px;
+        height: 72px;
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2rem;
+       /* From https://css.glass */
+        background: rgba(255, 211, 156, 0.37);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 211, 156, 0.47);
+      }
+
+      .desktop-icon p {
+        margin: 8px 0 0;
+        font-family: "Changa One", sans-serif;
+        font-weight: 100;
+        color: white;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+      }
+
+      .window {
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: min(560px, 90vw);
+        border-radius: 24px;
+        overflow: hidden;
+        background: rgba(255, 240, 223, 0.95);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+        color: #2e2e2e;
+        z-index: 10;
+        padding: 10px;
+      }
+
+      .window-titlebar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 14px;
+        background: rgba(241, 207, 139, 0.95);
+        border-radius: 20px;
+        color: white;
+        cursor: move;
+      }
+
+      .window-close {
+        border: none;
+        background: #ff6b6b;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+
+      .window-content {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        max-height: 60vh;
+        overflow: auto;
+      }
+
+      .window-content h2,
+      .window-content p,
+      .window-content a {
+        margin: 0;
+        font-family: "Changa One", sans-serif;
+        font-weight: 100;
+        color: black;
+      }
+
+      .window-content a {
+        color: #7a2d0d;
+        text-decoration: underline;
+      }
