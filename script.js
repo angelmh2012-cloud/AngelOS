@@ -119,6 +119,135 @@ document.querySelectorAll(".window").forEach((windowElement) => {
   }
 });
 
+const musicPlayerRoot = document.getElementById("musicPlayer");
+
+if (musicPlayerRoot) {
+  const audio = document.getElementById("musicAudio");
+  const playPauseBtn = document.getElementById("playPauseBtn");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  const progressBar = document.getElementById("progressBar");
+  const currentTimeEl = document.getElementById("currentTime");
+  const durationTimeEl = document.getElementById("durationTime");
+  const currentTitleEl = document.getElementById("currentTitle");
+  const currentArtistEl = document.getElementById("currentArtist");
+  const albumArtEl = document.getElementById("albumArt");
+  const statusPill = document.getElementById("statusPill");
+
+  const tracks = [
+    { title: "Devuélveme a mi chica", artist: "Hombres G", src: "Hombres G - Devuélveme a mi chica.MP3.mp3" },
+    { title: "Human", artist: "Rag'n'Bone Man", src: "Rag'n'Bone Man - Human (Official Video).MP3.mp3" },
+    { title: "Lose Yourself", artist: "Eminem", src: "Eminem - Lose Yourself.MP3.mp3" },
+    { title: "A Man Without Love", artist: "Engelbert Humperdinck", src: "A Man Without Love ❤️ Engelbert Humperdinck 🎤 1968 🌙 Moon Knight.MP3.mp3" },
+    { title: "Sweet Child O' Mine", artist: "Guns N' Roses", src: "Guns N' Roses - Sweet Child O' Mine (Official Music Video).MP3.mp3" },
+    { title: "19-2000", artist: "Gorillaz", src: "Gorillaz - 19-2000 (Official Video).MP3.mp3" },
+    { title: "Do I Wanna Know", artist: "Arctic Monkeys", src: "Arctic Monkeys - Do I Wanna Know (Official Video).MP3.mp3" },
+    { title: "Creep", artist: "Radiohead", src: "Radiohead - Creep.MP3.mp3" },
+    { title: "Without Me", artist: "Eminem", src: "Eminem - Without Me (Official Music Video).MP3.mp3" },
+    { title: "Seven Nation Army", artist: "The White Stripes", src: "The White Stripes - Seven Nation Army (Official Music Video).MP3.mp3" },
+    { title: "Can't Take My Eyes Off You", artist: "Engelbert Humperdinck", src: "Engelbert Humperdinck - Can't Take My Eyes Off You (Official Lyric Video).MP3.mp3" },
+    { title: "My Way", artist: "Frank Sinatra", src: "My Way (2008 Remastered).MP3.mp3" },
+    { title: "Believer", artist: "Imagine Dragons", src: "Imagine Dragons - Believer (Official Music Video).MP3.mp3" }
+  ];
+
+  let currentTrackIndex = 0;
+
+  function formatTime(seconds) {
+    if (!Number.isFinite(seconds)) return "0:00";
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, "0")}`;
+  }
+
+  function updatePlayerUI() {
+    const track = tracks[currentTrackIndex];
+    if (!track) return;
+    currentTitleEl.textContent = track.title;
+    currentArtistEl.textContent = track.artist;
+    albumArtEl.textContent = "♪";
+  }
+
+  function buildTrackSrc(fileName) {
+    return `./${encodeURIComponent(fileName)}`;
+  }
+
+  function loadTrack(index) {
+    currentTrackIndex = index;
+    const track = tracks[currentTrackIndex];
+    audio.src = buildTrackSrc(track.src);
+    audio.load();
+    updatePlayerUI();
+    statusPill.textContent = "Cargando…";
+  }
+
+  function playCurrentTrack() {
+    audio.play().then(() => {
+      statusPill.textContent = "Reproduciendo";
+      playPauseBtn.textContent = "⏸";
+    }).catch(() => {
+      statusPill.textContent = "Listo";
+    });
+  }
+
+  function togglePlayPause() {
+    if (audio.paused) {
+      playCurrentTrack();
+    } else {
+      audio.pause();
+      statusPill.textContent = "Pausado";
+      playPauseBtn.textContent = "▶";
+    }
+  }
+
+  function nextTrack() {
+    currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
+    loadTrack(currentTrackIndex);
+    playCurrentTrack();
+  }
+
+  function prevTrack() {
+    currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
+    loadTrack(currentTrackIndex);
+    playCurrentTrack();
+  }
+
+  playPauseBtn.addEventListener("click", togglePlayPause);
+  prevBtn.addEventListener("click", prevTrack);
+  nextBtn.addEventListener("click", nextTrack);
+
+  progressBar.addEventListener("input", () => {
+    if (!Number.isFinite(audio.duration)) return;
+    audio.currentTime = (progressBar.value / 100) * audio.duration;
+  });
+
+  audio.addEventListener("loadedmetadata", () => {
+    durationTimeEl.textContent = formatTime(audio.duration);
+    progressBar.max = 100;
+  });
+
+  audio.addEventListener("timeupdate", () => {
+    if (!Number.isFinite(audio.duration)) return;
+    const progress = (audio.currentTime / audio.duration) * 100;
+    progressBar.value = progress;
+    currentTimeEl.textContent = formatTime(audio.currentTime);
+  });
+
+  audio.addEventListener("ended", nextTrack);
+  audio.addEventListener("play", () => {
+    statusPill.textContent = "Reproduciendo";
+    playPauseBtn.textContent = "⏸";
+  });
+  audio.addEventListener("pause", () => {
+    if (!audio.ended) {
+      statusPill.textContent = "Pausado";
+      playPauseBtn.textContent = "▶";
+    }
+  });
+
+  loadTrack(0);
+  updatePlayerUI();
+}
+
 dockList?.addEventListener("click", (event) => {
   const button = event.target.closest(".dock-button");
   if (!button) return;
