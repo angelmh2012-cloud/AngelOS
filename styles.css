@@ -550,6 +550,29 @@ a:hover {
 	display: block;
 }
 
+.base{
+position: fixed; 
+  top: -10;
+  left: 10;
+  width: 100vw;  
+  height: 100vh; 
+  z-index: 9999; 
+  object-fit: cover;
+  transition: opacity 1s ease;
+}
+
+
+@keyframes aparecer {
+    0% {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+}
+
 
 
 @media (max-width: 767px) {

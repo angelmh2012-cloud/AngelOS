@@ -59,6 +59,8 @@ function openWindow(id) {
   ensureDockItem(id);
 }
 
+
+
 function closeWindow(id) {
   const ventana = document.getElementById(`window-${id}`);
   if (ventana) {
@@ -67,35 +69,38 @@ function closeWindow(id) {
 }
 
 function makeDraggable(element, handle) {
-  let pos1 = 0;
-  let pos2 = 0;
-  let pos3 = 0;
-  let pos4 = 0;
+  let startX = 0;
+  let startY = 0;
+  let startLeft = 0;
+  let startTop = 0;
 
   handle.addEventListener("mousedown", startDrag);
 
   function startDrag(event) {
     if (event.target.closest("button")) return;
 
+    const rect = element.getBoundingClientRect();
     element.style.zIndex = String(++zIndex);
-    pos3 = event.clientX;
-    pos4 = event.clientY;
+    element.style.transform = "none";
+    element.style.left = `${rect.left}px`;
+    element.style.top = `${rect.top}px`;
+
+    startX = event.clientX;
+    startY = event.clientY;
+    startLeft = rect.left;
+    startTop = rect.top;
+
+    event.preventDefault();
     document.onmouseup = stopDrag;
     document.onmousemove = dragWindow;
   }
 
   function dragWindow(event) {
-    pos1 = pos3 - event.clientX;
-    pos2 = pos4 - event.clientY;
-    pos3 = event.clientX;
-    pos4 = event.clientY;
+    const deltaX = event.clientX - startX;
+    const deltaY = event.clientY - startY;
 
-    const newTop = element.offsetTop - pos2;
-    const newLeft = element.offsetLeft - pos1;
-
-    element.style.top = `${newTop}px`;
-    element.style.left = `${newLeft}px`;
-    element.style.transform = "none";
+    element.style.left = `${startLeft + deltaX}px`;
+    element.style.top = `${startTop + deltaY}px`;
   }
 
   function stopDrag() {
@@ -210,6 +215,30 @@ if (musicPlayerRoot) {
     loadTrack(currentTrackIndex);
     playCurrentTrack();
   }
+  const fondoAnima = document.getElementById("fondo")
+  
+
+
+    setTimeout(function(){
+      fondoAnima.style.opacity = "0";
+    }, 1500);
+
+
+          setTimeout(function() {
+      fondoAnima.src = "mibombo.png";
+    }, 2000);
+
+
+           setTimeout(function(){
+      fondoAnima.style.opacity = "1";
+    }, 2000);
+
+
+    setTimeout(function(){
+      fondoAnima.style.opacity = "0";
+      fondoAnima.style.zIndex = "0"
+    }, 3000);
+  
 
   playPauseBtn.addEventListener("click", togglePlayPause);
   prevBtn.addEventListener("click", prevTrack);
