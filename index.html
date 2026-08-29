@@ -19,7 +19,7 @@
 
   <body style="background-image: url(1913324.jpg); background-size: cover; background-position: center; background-repeat: no-repeat;">
     <div>
-      <img src="Sin título-1.png" id="fondo" class="base">
+      <img src="introduction.png" id="fondo" class="base">
     </div>
     
     <div class="topbar">
@@ -60,8 +60,11 @@
       </div>
 
       <div class="desktop-icon" data-window="terminal">
-        <div class="icon-circle">Terminal</div>
-        <p>Terminal</p>
+        <div class="icon-circle">
+          <img src="terminal.png" style="width: 60px; height: 60px;
+        padding: 10px;" >
+        </div>
+         <p>Terminal</p>
       </div>
     </div>
 
@@ -74,7 +77,7 @@
         <h2>Intro: This would be a repo (not github nerdy people) of all challenges in my life, my awards and prizes.</h2>
         <h2>I am a student, of 14 years old, I like robotics, coding, and quantum mechanics</h2>
         <h2>//////////////////////////////////////////////////////////////////</h2>
-        <h2>Esto va a ser un repositorio (no de github, nerds) sobre todaslas experiencias y retos de mi vida, incluyendo trofeoes y galardones</h2>
+        <h2>Esto va a ser un repositorio (no de github, nerds) sobre todas las experiencias y retos de mi vida, incluyendo trofeoes y galardones</h2>
         <h2>Soy un estudiante de 14 años, me gusta la robótica, la programación y la mecánica cuántica</h2>
         <div id="imagenChistosa">
           <img src=https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTX6UXImbQAC7ej2i2gS7cAuUN5hMsAvsXjwxLKcDdnEbPM2SsoMiVMZwAz&s=1024 alt="Imagen chistosa" style="width: 100%; height: auto; border-radius: 20px;">
@@ -85,7 +88,7 @@
     <div id="window-proyectos" class="window">
       <div class="window-titlebar">
         <span>Proyectos</span>
-        <button class="window-close" data-window="proyectos" aria-label="Cerrar ventana">×</button>
+        <button class="window-close" data-window="proyectos" aria-label="Cerrar ventana"></button>
       </div>
       <div class="window-content">
         <h2>Mis proyectos futuros</h2>
@@ -94,13 +97,13 @@
           based on Penman-Monteith equation, so i ised a lot of ambient sensors, unfortunatly i didnt win.
         </p>
         <p>Actually  I did a lot of projects last summer not like today, i just do a WebOS :c, one of the projects of the last 
-          summer was a VFX project in blender, i did a effect similar to Oppenheimer dreams, also in a course of PrepaTec, I
-          built a FTC robot wich was a mecanum robot i thing.
+          summer was a VFX project in blender, i did a effect similar to Oppenheimer dreams, also in a course at PrepaTec, I
+          built a FTC robot wich was a mecanum.
         </p>
         <p></p>
         <p>Ahora mismo, me estoy preparando para ir a Rumania, en un robochallenge, por eso estoy construyendo un robot sumo para esa competencia.</p>
         <p>Hace un año estaba terminando mi proyecto para ExpoCiencias en Tamaulipas, México, era algo similar a un invernadero con un sistema de riego basado en la ecuación de Penman-Monteith, por lo que utilicé muchos sensores ambientales, desafortunadamente no gané.</p>
-        <p>En realidad, hice muchos proyectos el verano pasado, no como hoy, solo hago un WebOS :c, uno de los proyectos del último verano fue un proyecto de VFX en blender, hice un efecto similar a los sueños de Oppenheimer, también en un curso de PrepaTec, construí un robot FTC que creo que era un robot mecanum.</p>
+        <p>En realidad, hice muchos proyectos el verano pasado, no como hoy, solo hago un WebOS :c, uno de los proyectos del último verano fue un proyecto de VFX en blender, hice un efecto similar a los sueños de Oppenheimer, también en un curso de PrepaTec, construí un robot FTC que era un robot mecanum.</p>
 <a href="https://front.codes/" class="logo hover-target" target="_blank">
 		<img src="https://assets.codepen.io/1462889/fcb.png" alt="">
 	</a>
@@ -211,7 +214,7 @@
     <div id="window-contacto" class="window">
       <div class="window-titlebar">
         <span>Contacto</span>
-        <button class="window-close" data-window="contacto" aria-label="Cerrar ventana">×</button>
+        <button class="window-close" data-window="contacto" aria-label="Cerrar ventana"></button>
       </div>
       <div class="window-content">
         <h2>Contacto</h2>
@@ -224,6 +227,19 @@
         <img src="Send Me GIF by DJ Khaled.gif" alt="Imagen de contacto" style="width: 100%; height: auto; border-radius: 20px;">
       </div>
       </div>
+    </div>
+
+    <div id="window-terminal" class="window" style="width:fit-content;" >
+      <div class="window-titlebar">
+       <button class="window-close" data-window="terminal" aria-label="Cerrar ventana"></button>
+     </div>
+    <div class="terminal" id="terminal">
+      <div id="output"></div>
+      <div class="input-line">
+        <span class="prompt">AngelOS@user:-$</span>
+        <input type="text" id="command-input" autofocus autocomplete="off" />
+      </div>
+     </div>
     </div>
 
     <div class="dock" aria-label="Dock de aplicaciones">

@@ -221,23 +221,9 @@ if (musicPlayerRoot) {
 
     setTimeout(function(){
       fondoAnima.style.opacity = "0";
-    }, 1500);
-
-
-          setTimeout(function() {
-      fondoAnima.src = "mibombo.png";
+      fondoAnima.style.zIndex = "0";
     }, 2000);
 
-
-           setTimeout(function(){
-      fondoAnima.style.opacity = "1";
-    }, 2000);
-
-
-    setTimeout(function(){
-      fondoAnima.style.opacity = "0";
-      fondoAnima.style.zIndex = "0"
-    }, 3000);
   
 
   playPauseBtn.addEventListener("click", togglePlayPause);
@@ -283,3 +269,73 @@ dockList?.addEventListener("click", (event) => {
 
   openWindow(button.dataset.window);
 });
+
+const input = document.getElementById('command-input');
+const output = document.getElementById('output');
+
+input.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    const rawInput = input.value.trim();
+    if (rawInput !== '') {
+      procesarComando(rawInput);
+    }
+    input.value = '';
+  }
+});
+
+function imprimirTexto(texto) {
+  const linea = document.createElement('div');
+  linea.textContent = texto;
+  output.appendChild(linea);
+  
+  const terminal = document.getElementById('terminal');
+  terminal.scrollTop = terminal.scrollHeight;
+}
+
+const comandos = {
+  'gustos': () => `Mis gustos:\n- Programación e IoT\n- Robótica\n- Física Cuántica `,
+  'clear': () => { output.innerHTML = ''; return ''; },
+  'fastfetch': () => `
+                                         
+                  -%%%+                         Operative System: AngelOS
+                . =%%%* .                       Ram Memory: 2 bytes
+             +%%%%     #%%%*                    Kernel: Chromimum based 9.0.0
+          %%%%-           :%%%%                 Whoami: you
+       %%%%                   %%%%.      
+   =%%%%                         #%%%+   
+ :%%=  -#                  :::.     -%%+ 
+ :%%   @@ @@@@@@          @@@..:     %%+ 
+ :%%           .@@*      @@@@@::     %%+ 
+ :%%@@*    @. @-  @@      .#.        %%+ 
+ :%% -    @    @   @@  @@@           %%+ 
+ :%%  @@@  @. @       @@@@%          %%+ 
+ :%%    @@@          @@@ @@+         %%+ 
+ :%%      :@@@@@@@  @@%  .@@:        %%+ 
+ :%%              :@@=    -@@.       %%+ 
+ :%%             +@@:      #@@       %%+ 
+ :%%            %@@         @:       %%+ 
+  %%%%         *@@           @@@   #%%%  
+    .%%%%                       %%%%.    
+        %%%%-               :%%%%        
+           +%%%%         #%%%*           
+              .%%%%   %%%%.              
+                  %%%%%                  
+                                         
+
+  `,
+  'help': () => `
+  fastfetch(info about OS)
+  gustos(info about me)
+  clear(just clear dude)`
+};
+
+function procesarComando(cmd) {
+  imprimirTexto(`AngelOS@user:-$ ${cmd}`);
+  
+  if (comandos[cmd]) {
+    const respuesta = comandos[cmd]();
+    if (respuesta) imprimirTexto(respuesta);
+  } else {
+    imprimirTexto(`Comando no encontrado: ${cmd}. Escribe "help" para ver opciones.`);
+  }
+}

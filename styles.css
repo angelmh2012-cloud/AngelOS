@@ -130,6 +130,31 @@ p { margin-top:-18px }
         padding: 20px;
         width: fit-content;
       }
+      .terminal{
+      background-color: #0c0c0c;
+      color: #00ff66;
+      font-family: 'Courier New', monospace;
+      border-radius: 50px;
+      padding: 20px;
+      height: 80vh;
+      width: 180vh;
+      overflow-y: auto;
+      }
+
+      #output {
+      white-space: pre-wrap;
+      word-break: break-all;
+      }
+
+#command-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #00ff66;
+  font-family: inherit;
+  font-size: inherit;
+  width: 70%;
+}
 
       .desktop-icon {
         width: 100px;
