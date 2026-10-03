@@ -593,8 +593,8 @@ a:hover {
 
 .base{
 position: fixed; 
-  top: -10;
-  left: 10;
+  top: -10px;
+  left: 10px;
   width: 100vw;  
   height: 100vh; 
   z-index: 9999; 
