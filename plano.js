@@ -1,24 +1,17 @@
 // Versión SIN módulos: funciona con <script src="main.js"></script> normal.
 // Requiere que three.min.js se cargue antes (ver index.html).
 
-(function () {
+function plano (img, plane) {
   // ====== CONFIG ======
-  var IMAGE_URL = '';      // Ruta de tu imagen (ej: 'fcb.png'). Vacío = textura de ejemplo.
+  var IMAGE_URL = img;      // Ruta de tu imagen (ej: 'fcb.png'). Vacío = textura de ejemplo.
   var PLANE_HEIGHT = 2;    // Alto del plano
-  var SMOOTHING = 0.1;     // 0.01 = lento, 1 = instantáneo
+  var SMOOTHING = 0.08;     // 0.01 = lento, 1 = instantáneo
   var FOLLOW_DEPTH = 3;    // Profundidad a la que "mira" el plano
   // ====================
 
-  if (typeof THREE === 'undefined') {
-    console.error('[plano] THREE no está definido: three.min.js no se cargó antes de main.js');
-    return;
-  }
 
-  var container = document.getElementById('plane-container');
-  if (!container) {
-    console.error('[plano] No existe un elemento con id="plane-container" en el HTML');
-    return;
-  }
+
+  var container = document.getElementById(plane);
 
   function size() {
     return {
@@ -120,4 +113,6 @@
   }
 
   console.log('[plano] iniciado correctamente');
-})();
+}
+
+plano(Screenshot_20261003_171804.png, plane-container);
