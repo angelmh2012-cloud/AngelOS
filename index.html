@@ -2,6 +2,9 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    <script type="importmap">
+      { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js" } }
+    </script>
     <title>AngelOS</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -283,12 +286,12 @@
       <ul id="dockList"></ul>
     </div>
 
-    <div id="plane-container">
+    <div id="plane-container" style="height: 1000px; width: 1000px;">
 
     </div>
 
     
 
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
   </body>
 </html>
