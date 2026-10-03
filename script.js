@@ -1,3 +1,5 @@
+import * as THREE from 'three';
+
 function actualizarTiempo() {
   const textoTiempo = document.querySelector("#Reloj");
   if (textoTiempo) {
@@ -339,7 +341,7 @@ function procesarComando(cmd) {
     imprimirTexto(`Comando no encontrado: ${cmd}. Escribe "help" para ver opciones.`);
   }
 }
-import * as THREE from 'three';
+
 
 // ====== CONFIG ======
 const IMAGE_URL = 'image.png';      // Pon aquí la ruta o URL de tu imagen. Vacío = textura de ejemplo.
