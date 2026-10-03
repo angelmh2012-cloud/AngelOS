@@ -121,7 +121,11 @@ p { margin-top:-18px }
         padding: 5px;
         margin: 0;
       }
-
+#webgl-canvas {
+  width: 100vw;
+  height: 100vh;
+  display: block;
+}
       .desktop {
         position: relative;
         display: flex;

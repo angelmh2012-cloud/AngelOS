@@ -188,7 +188,7 @@ if (musicPlayerRoot) {
   function playCurrentTrack() {
     audio.play().then(() => {
       statusPill.textContent = "Reproduciendo";
-      playPauseBtn.textContent = "⏸";
+      playPauseBtn.textContent = "||";
     }).catch(() => {
       statusPill.textContent = "Listo";
     });
@@ -200,7 +200,7 @@ if (musicPlayerRoot) {
     } else {
       audio.pause();
       statusPill.textContent = "Pausado";
-      playPauseBtn.textContent = "▶";
+      playPauseBtn.textContent = "|>";
     }
   }
 
@@ -250,12 +250,12 @@ if (musicPlayerRoot) {
   audio.addEventListener("ended", nextTrack);
   audio.addEventListener("play", () => {
     statusPill.textContent = "Reproduciendo";
-    playPauseBtn.textContent = "⏸";
+    playPauseBtn.textContent = "||";
   });
   audio.addEventListener("pause", () => {
     if (!audio.ended) {
       statusPill.textContent = "Pausado";
-      playPauseBtn.textContent = "▶";
+      playPauseBtn.textContent = "|>";
     }
   });
 
@@ -338,4 +338,87 @@ function procesarComando(cmd) {
   } else {
     imprimirTexto(`Comando no encontrado: ${cmd}. Escribe "help" para ver opciones.`);
   }
+}
+import * as THREE from 'three';
+
+// ====== CONFIG ======
+const IMAGE_URL = 'image.png';      // Pon aquí la ruta o URL de tu imagen. Vacío = textura de ejemplo.
+const PLANE_HEIGHT = 2;    // Alto del plano (el ancho se ajusta a la proporción de la imagen)
+const SMOOTHING = 0.1;     // 0.01 = muy lento, 1 = instantáneo
+const FOLLOW_DEPTH = 3;    // Distancia (en Z) a la que "mira" el plano, hacia la cámara
+// ====================
+
+// Contenedor donde vivirá el canvas (el div de tu HTML)
+const container = document.getElementById('plane-container');
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 100);
+camera.position.z = 5;
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setSize(container.clientWidth, container.clientHeight);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+container.appendChild(renderer.domElement);
+
+// Plano con la imagen (geometría 1x1, se escala según la proporción)
+const material = new THREE.MeshBasicMaterial({ side: THREE.DoubleSide, transparent: true });
+const plane = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), material);
+scene.add(plane);
+
+function applyTexture(tex) {
+  tex.colorSpace = THREE.SRGBColorSpace;
+  tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  material.map = tex;
+  material.needsUpdate = true;
+  const img = tex.image;
+  const aspect = img.width / img.height;
+  plane.scale.set(PLANE_HEIGHT * aspect, PLANE_HEIGHT, 1);
+}
+
+if (IMAGE_URL) {
+  new THREE.TextureLoader().load(IMAGE_URL, applyTexture);
+
+const mouse = new THREE.Vector2(0, 0);
+const target = new THREE.Vector3(0, 0, FOLLOW_DEPTH);
+
+// Se escucha en toda la ventana, pero la posición se calcula relativa al div.
+// Así el plano sigue al mouse incluso cuando está fuera del contenedor.
+addEventListener('pointermove', (e) => {
+  const rect = container.getBoundingClientRect();
+  mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+  mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+});
+
+// Rotación suave con quaterniones
+const targetQuat = new THREE.Quaternion();
+const dummy = new THREE.Object3D();
+
+function animate() {
+  requestAnimationFrame(animate);
+
+  // Proyecta el mouse a un punto en el espacio, a la profundidad FOLLOW_DEPTH
+  target.set(mouse.x, mouse.y, 0.5).unproject(camera);
+  const dir = target.sub(camera.position).normalize();
+  const distance = (FOLLOW_DEPTH - camera.position.z) / dir.z;
+  target.copy(camera.position).add(dir.multiplyScalar(distance));
+
+  // Calcula la rotación deseada y suaviza
+  dummy.position.copy(plane.position);
+  dummy.lookAt(target);
+  targetQuat.copy(dummy.quaternion);
+  plane.quaternion.slerp(targetQuat, SMOOTHING);
+
+  renderer.render(scene, camera);
+}
+animate();
+
+// Se adapta si el div cambia de tamaño (no solo la ventana)
+new ResizeObserver(() => {
+  const w = container.clientWidth;
+  const h = container.clientHeight;
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+  renderer.setSize(w, h);
+}).observe(container);
 }
