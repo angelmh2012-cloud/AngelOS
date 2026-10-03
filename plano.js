@@ -1,6 +1,5 @@
 // Versión SIN módulos: funciona con <script src="main.js"></script> normal.
 // Requiere que three.min.js se cargue antes (ver index.html).
-   console.log('plano.js cargó');
 
 (function () {
   // ====== CONFIG ======
@@ -88,13 +87,15 @@
   });
 
   var target = new THREE.Vector3();
+  var dir = new THREE.Vector3();   // vector aparte: antes 'dir' y 'target' eran el mismo objeto
   var dummy = new THREE.Object3D();
 
   function animate() {
     requestAnimationFrame(animate);
 
-    target.set(mouse.x, mouse.y, 0.5).unproject(camera);
-    var dir = target.sub(camera.position).normalize();
+    // Rayo de la cámara que pasa por el mouse
+    dir.set(mouse.x, mouse.y, 0.5).unproject(camera).sub(camera.position).normalize();
+    // Punto de ese rayo a la profundidad FOLLOW_DEPTH
     var distance = (FOLLOW_DEPTH - camera.position.z) / dir.z;
     target.copy(camera.position).add(dir.multiplyScalar(distance));
 

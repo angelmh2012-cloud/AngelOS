@@ -602,15 +602,6 @@ position: fixed;
   transition: opacity 1s ease;
 }
 
-  #plane-container {
-    width: 500px;
-    height: 400px;
-    max-width: 100%;
-    background: #1c1c1c;
-    border-radius: 12px;
-    overflow: hidden;
-  }
-  #plane-container canvas { display: block; }
 
 
 @keyframes aparecer {
