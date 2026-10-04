@@ -123,6 +123,30 @@ p { margin-top:-18px }
         padding: 5px;
         margin: 0;
       }
+      .container-reco{
+        display: flex;
+        gap: 10px;
+        justify-content: space-between;
+        height: fit-content;
+        overflow: visible;
+      }
+      .plane{
+        background-color: aliceblue;
+        border-radius: 20px;
+        width: fit-content; 
+        height: 80px; width: 130px;
+        cursor: pointer;
+        transition: transform 0.1s ease-out ;
+        will-change: transform;
+        z-index: 100;
+        overflow: visible;
+      }
+      .plane canvas{
+        position: relative;
+        z-index: 1;
+        transform-origin: center;
+        transition: transform 0.2s ease-out;
+      }
       .desktop {
         position: relative;
         z-index: 2;
