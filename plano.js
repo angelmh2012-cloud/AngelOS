@@ -3,7 +3,7 @@
 
 function plano (img, plane) {
   // ====== CONFIG ======
-  var IMAGE_URL = String(img);      // Ruta de tu imagen (ej: 'fcb.png'). Vacío = textura de ejemplo.
+  var IMAGE_URL = img;      // Ruta de tu imagen (ej: 'fcb.png'). Vacío = textura de ejemplo.
   var PLANE_HEIGHT = 2;    // Alto del plano
   var SMOOTHING = 0.08;     // 0.01 = lento, 1 = instantáneo
   var FOLLOW_DEPTH = 3;    // Profundidad a la que "mira" el plano
