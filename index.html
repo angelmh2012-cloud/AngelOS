@@ -22,7 +22,14 @@
 
   <body style="background-image: url(1913324.jpg); background-size: cover; background-position: center; background-repeat: no-repeat;">
     <div>
-      <img src="introduction.png" id="fondo" class="base">
+      <img src="introduction.png" id="fondo" style="position: fixed; 
+left: 0px;
+top: 0px;
+width: 100vw;  
+height: 100vh; 
+z-index: 9999; 
+object-fit: cover;
+transition: opacity 1s ease;">
     </div>
     
     <div class="topbar">
@@ -74,7 +81,10 @@
         <p>Filosofía</p>
       </div>
       <div class="desktop-icon" data-window="reconocimientos">
-        <div class="icon-circle">0</div>
+        <div class="icon-circle">
+          <img src="reconocimiento.jpg" style="padding: 10px;; height: 50px;">
+        </div>
+        <p>Reconocimientos</p>
       </div>
     </div>
 
@@ -279,7 +289,7 @@
      </div>
     </div>
 
-    <div id="window-reconocimientos" class="window" style="overflow: visible;">
+    <div id="window-reconocimientos" class="window" style="overflow: visible; width: fit-content;">
       <div class="window-titlebar">
         <span>Reconocimientos</span>
         <button class="window-close" data-window="reconocimientos" aria-label="Cerrar ventana"></button>
